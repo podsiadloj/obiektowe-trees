@@ -6,6 +6,7 @@ import java.util.List;
 public class Tree {
     public String name;
     public List<Tree> children = new ArrayList<>();
+    public Tree parent;
 
     Tree getSubtree(String subTreeName){
         if(subTreeName.equals(this.name)){ return this; }
@@ -18,5 +19,27 @@ public class Tree {
 
     Tree(String name){
         this.name = name;
+    }
+
+    Boolean addChild(Tree child){
+        if((!this.name.equals(child.name)) && this.children.stream().noneMatch(c->c.name.equals(name))){
+            child.parent = this;
+            this.children.add(child);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    Tree removeChild(String name){
+        for (int i = 0; i<this.children.size(); i++){
+            Tree current = this.children.get(i);
+            if(this.children.get(i).name.equals(name)){
+                current.parent = null;
+                this.children.remove(i);
+                return current;
+            }
+        }
+        return null;
     }
 }
