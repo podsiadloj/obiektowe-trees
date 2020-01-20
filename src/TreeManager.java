@@ -3,7 +3,6 @@ import java.io.IOException;
 
 public interface TreeManager {
 
-    // loads two strings
     void loadTrees(File file1, File file2) throws InvalidInputException, IOException;
     boolean saveTrees(File file1, File file2);
 
