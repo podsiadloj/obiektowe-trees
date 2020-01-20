@@ -1,8 +1,8 @@
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class TreeManagerImpl implements TreeManager {
@@ -11,18 +11,20 @@ public class TreeManagerImpl implements TreeManager {
     Tree tree2;
 
     @Override
-    public void loadTrees(String def1, String def2) throws InvalidInputException {
+    public void loadTrees(File file1, File file2) throws InvalidInputException, IOException {
         try {
-            this.tree1 = this.parseTree(def1, "1_");
-            this.tree2 = this.parseTree(def2, "2_");
+            this.tree1 = this.loadTree(file1, "1_");
+            this.tree2 = this.loadTree(file2, "2_");
+        } catch (IOException e) {
+            throw e;
         } catch (Exception e){
             throw new InvalidInputException();
         }
     }
 
     @Override
-    public boolean saveTrees(String filename1, String filename2) {
-        return (saveTree(tree1, filename1) && saveTree(tree2, filename2));
+    public boolean saveTrees(File file1, File file2) {
+        return (saveTree(tree1, file1) && saveTree(tree2, file2));
     }
 
     @Override
@@ -60,8 +62,16 @@ public class TreeManagerImpl implements TreeManager {
         }
     }
 
-    private Tree parseTree(String input, String prefix){
-        List<String> lines = input.lines().filter(l -> l.trim().length() > 0).collect(Collectors.toList());
+    private Tree loadTree(File input, String prefix) throws IOException {
+        FileInputStream inputStream = new FileInputStream(input);
+        List<String> lines = new ArrayList<>();
+        Scanner scanner = new Scanner(inputStream);
+        while(scanner.hasNextLine()){
+            String line = scanner.nextLine().trim();
+            if(line.length() > 0){
+                lines.add(line);
+            }
+        }
         int length = Integer.parseInt(lines.get(0).split(" ")[1]);
         List<TreeLine> tl = lines
                 .subList(1, length + 1)
@@ -78,13 +88,13 @@ public class TreeManagerImpl implements TreeManager {
         return root;
     }
 
-    private boolean saveTree(Tree tree, String filename){
+    private boolean saveTree(Tree tree, File file){
         List<String> lines = new ArrayList<>();
         List<String> nodeLines = serializeNode(tree);
         lines.add("@tasks " + nodeLines.size());
         lines.addAll(nodeLines);
         try {
-            PrintWriter writer = new PrintWriter(filename, StandardCharsets.UTF_8);
+            PrintWriter writer = new PrintWriter(file, StandardCharsets.UTF_8);
             for (String line : lines) {
                 writer.println(line);
             }

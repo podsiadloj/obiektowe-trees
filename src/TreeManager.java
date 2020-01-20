@@ -1,6 +1,11 @@
+import java.io.File;
+import java.io.IOException;
+
 public interface TreeManager {
-    void loadTrees(String def1, String def2) throws InvalidInputException;
-    boolean saveTrees(String filename1, String filename2);
+
+    // loads two strings
+    void loadTrees(File file1, File file2) throws InvalidInputException, IOException;
+    boolean saveTrees(File file1, File file2);
 
     Tree getTree1();
     Tree getTree2();
