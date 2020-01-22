@@ -9,7 +9,7 @@ public interface TreeManager {
     Tree getTree1();
     Tree getTree2();
 
-    // swaps subtrees, making sure that they are on different trees
+    // swaps subtrees
     void swap(String subtreeName1, String subtreeName2);
 
     class InvalidInputException extends Exception {}
