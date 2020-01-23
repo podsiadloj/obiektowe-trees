@@ -10,6 +10,8 @@ import java.util.stream.Collectors;
 
 public class TreeIOImpl implements TreeIO {
 
+    private static final String splitRx = ",?\\s+";
+
     @Override
     public Tree loadTree(File input, String prefix) throws IOException {
         FileInputStream inputStream = new FileInputStream(input);
@@ -21,7 +23,7 @@ public class TreeIOImpl implements TreeIO {
                 lines.add(line);
             }
         }
-        int length = Integer.parseInt(lines.get(0).split(" ")[1]);
+        int length = Integer.parseInt(lines.get(0).trim().split(splitRx)[1]);
         List<TreeLine> tl = lines
                 .subList(1, length + 1)
                 .stream()
@@ -62,7 +64,7 @@ public class TreeIOImpl implements TreeIO {
         List<String> childrenNames = new ArrayList<>();
 
         TreeLine(String input, String prefix){
-            String[] words = input.trim().split(" ");
+            String[] words = input.trim().split(splitRx);
             head = new Tree(prefix + words[0]);
             if(words[1] != null ){
                 for(int i = 2; i < (2 + Integer.parseInt(words[1])); i++){
@@ -77,7 +79,7 @@ public class TreeIOImpl implements TreeIO {
         String name = node.name;
         int childrenCount = node.children.size();
         List<String> childrenNames = node.children.stream().map(c->c.name).collect(Collectors.toList());
-        String line = name + " " + childrenCount + " " + String.join(" ", childrenNames);
+        String line = name + " " + childrenCount + " " + String.join(", ", childrenNames);
         lines.add(line);
         for (Tree child: node.children) {
             lines.addAll(serializeNode(child));
