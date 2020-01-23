@@ -1,4 +1,5 @@
 import java.io.*;
+import java.security.InvalidKeyException;
 
 public class TreeManagerImpl implements TreeManager {
     private TreeProcessor treeProcessor;
@@ -32,7 +33,7 @@ public class TreeManagerImpl implements TreeManager {
     }
 
     @Override
-    public void swap(String subtreeName1, String subtreeName2) {
+    public void swap(String subtreeName1, String subtreeName2) throws InvalidKeyException {
         this.treeProcessor.swap(subtreeName1, subtreeName2);
     }
 

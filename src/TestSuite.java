@@ -1,9 +1,11 @@
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.function.Executable;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
+import java.security.InvalidKeyException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -108,8 +110,18 @@ class TestSuite {
 
     @Order(4)
     @Test
+    void wrongSwap() {
+        assertThrows(InvalidKeyException.class, () -> tm.swap("1_3", "1_4"));
+    }
+
+    @Order(5)
+    @Test
     void swap() {
-        tm.swap("1_2", "2_10");
+        try{
+            tm.swap("1_2", "2_10");
+        } catch (Exception e) {
+            fail("Swapping subtrees failed:" + e.getMessage());
+        }
         Tree tree1 = tm.getTree1();
         Tree tree2 = tm.getTree2();
         assertNotNull(tree1.getSubtree("2_10"));
@@ -124,7 +136,7 @@ class TestSuite {
         assertNull(tree2.getSubtree("2_10"));
     }
 
-    @Order(5)
+    @Order(6)
     @Test
     void saveTrees() {
         tm.saveTrees(new File("testTree1.txt"), new File("testTree2.txt"));

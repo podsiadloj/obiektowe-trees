@@ -1,3 +1,5 @@
+import java.security.InvalidKeyException;
+
 public interface TreeProcessor {
 
     Tree getTree1();
@@ -6,5 +8,5 @@ public interface TreeProcessor {
     void putTree1(Tree tree);
     void putTree2(Tree tree);
 
-    void swap(String subtreeName1, String subtreeName2);
+    void swap(String subtreeName1, String subtreeName2) throws InvalidKeyException;
 }

@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.IOException;
+import java.security.InvalidKeyException;
 
 public interface TreeManager {
 
@@ -10,7 +11,7 @@ public interface TreeManager {
     Tree getTree2();
 
     // swaps subtrees
-    void swap(String subtreeName1, String subtreeName2);
+    void swap(String subtreeName1, String subtreeName2) throws InvalidKeyException;
 
     class InvalidInputException extends Exception {}
 }
