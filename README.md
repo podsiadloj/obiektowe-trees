@@ -5,7 +5,7 @@ Main class: `src/Main`
 
 
 Po wyświetleniu ramki nalezy wybrac pliki z zdefiniowanymi drzewami: file1 i file2 i wcisnac przycisk reload.
-Następnie po wczytaniu drzew zaznaczyc któe wierzchołki chcemy zamienić i wczisnąc przycisk button.
+Następnie po wczytaniu drzew zaznaczyc które wierzchołki chcemy zamienić i wczisnąc przycisk button.
 
 File1 i file2 powinno zawierać np:
 @tasks iloscwierzchołków
