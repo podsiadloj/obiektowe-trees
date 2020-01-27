@@ -212,6 +212,7 @@ public class TreeDisplay implements ActionListener
 	JButton file2Button = new JButton("...");
 	JButton reloadButton = new JButton("Reload");
 	JButton swapButton = new JButton("Swap");
+	JButton saveButton = new JButton("Save");
 	TreeManager treeManager;
 	TreeFrame tree1Frame = new TreeFrame("Tree 1");
 	TreeFrame tree2Frame = new TreeFrame("Tree 2");
@@ -259,6 +260,9 @@ public class TreeDisplay implements ActionListener
 		this.swapButton.addActionListener(this);
 		this.buttonPanel.add(swapButton);
 
+		this.saveButton.addActionListener(this);
+		this.buttonPanel.add(saveButton);
+
 		this.mainPanel.add(this.buttonPanel);
 
 		contentPane.add(this.mainPanel);
@@ -298,6 +302,9 @@ public class TreeDisplay implements ActionListener
 			this.reloadTree();
 		else if (e.getSource() == this.swapButton)
 			this.swapTree();
+		else if (e.getSource() == this.saveButton)
+			if (this.file1 != null && this.file2 != null)
+				this.treeManager.saveTrees(this.file1, this.file2);
 	}
 
 	private void reloadTree()
