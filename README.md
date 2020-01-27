@@ -9,9 +9,8 @@ Następnie po wczytaniu drzew zaznaczyc które wierzchołki chcemy zamienić i w
 Następnie można zapisane drzewa zapisać - do plików wybranych w polach wyboru plików - przyciskiem Save.
 
 File1 i file2 powinno zawierać np:
-@tasks iloscwierzchołków
+@tasks ilosc_wierzchołków
 
-1 ile ma dzieci numery węzłów
-2 ile ma dzieci numery węzłów
+1 liczba_dzieci numery węzłów...
+2 liczba_dzieci numery węzłów...
 .....
-oraz linijkę odstępu
