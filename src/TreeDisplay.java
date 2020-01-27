@@ -294,12 +294,12 @@ public class TreeDisplay implements ActionListener
 					this.file2Path.setText(filePath);
 				}
 
-				if (this.file1 != null && this.file2 != null)
-					this.reloadTree();
+
 			}
 		}
 		else if (e.getSource() == this.reloadButton)
-			this.reloadTree();
+			if (this.file1 != null && this.file2 != null)
+				this.reloadTree();
 		else if (e.getSource() == this.swapButton)
 			this.swapTree();
 		else if (e.getSource() == this.saveButton)
