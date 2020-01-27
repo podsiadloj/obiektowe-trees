@@ -32,6 +32,9 @@ public class TreeProcessorImpl implements TreeProcessor {
         } catch (NullPointerException e){
             throw new InvalidKeyException("Invalid subtree name");
         }
+        if(p1 == null || p2 == null){
+            throw new InvalidKeyException("Invalid subtree name");
+        }
         Tree s1 = p1.removeChild(subtreeName1);
         Tree s2 = p2.removeChild(subtreeName2);
         p2.addChild(s1);
